@@ -1,0 +1,160 @@
+* {
+    -fx-font-family: 'Segoe UI', 'Plus Jakarta Sans', sans-serif;
+}
+
+.login-background {
+    -fx-background-color: linear-gradient(to bottom right, #0D9488 0%, #134E4A 50%, #0F766E 100%);
+}
+
+.login-card {
+    -fx-background-color: rgba(255, 255, 255, 0.75);
+    -fx-background-radius: 24px;
+    -fx-background-insets: 0;
+    -fx-border-color: rgba(255, 255, 255, 0.5);
+    -fx-border-radius: 24px;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 60, 0, 0, 10);
+    -fx-padding: 40px;
+    -fx-spacing: 20px;
+    -fx-max-width: 420px;
+    -fx-min-width: 420px;
+}
+
+.login-logo {
+    -fx-font-size: 36px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #0D9488;
+    -fx-alignment: center;
+}
+
+.login-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: 700;
+    -fx-text-fill: rgba(255, 255, 255, 0.95);
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);
+    -fx-background-color: rgba(13, 148, 136, 0.3);
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 16px;
+}
+
+.login-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-alignment: center;
+}
+
+.login-form {
+    -fx-spacing: 16px;
+}
+
+.input-group {
+    -fx-spacing: 6px;
+}
+
+.input-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: rgba(0, 0, 0, 0.6);
+}
+
+.input-field {
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+    -fx-background-radius: 12px;
+    -fx-background-insets: 0;
+    -fx-border-color: rgba(255, 255, 255, 0.8);
+    -fx-border-radius: 12px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.3);
+    -fx-pref-height: 46px;
+    -fx-text-fill: #1E293B;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0, 0, 2);
+}
+
+.input-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-border-color: rgba(13, 148, 136, 0.6);
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.25), 12, 0, 0, 4), dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);
+}
+
+.input-field:disabled {
+    -fx-opacity: 0.5;
+}
+
+.login-button {
+    -fx-background-color: linear-gradient(to bottom, #0D9488, #0F766E);
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 12px;
+    -fx-padding: 14px;
+    -fx-pref-height: 48px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.4), 16, 0, 0, 6);
+}
+
+.login-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #0F766E, #115E59);
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.5), 24, 0, 0, 8);
+    -fx-translate-y: -1px;
+}
+
+.login-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #115E59, #134E4A);
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.3), 8, 0, 0, 4);
+    -fx-translate-y: 0px;
+}
+
+.login-button:disabled {
+    -fx-opacity: 0.7;
+    -fx-cursor: wait;
+}
+
+.login-error {
+    -fx-font-size: 13px;
+    -fx-text-fill: #EF4444;
+    -fx-alignment: center;
+    -fx-background-color: rgba(239, 68, 68, 0.1);
+    -fx-background-radius: 8px;
+    -fx-padding: 10px 16px;
+}
+
+.login-loading {
+    -fx-font-size: 13px;
+    -fx-text-fill: rgba(0, 0, 0, 0.5);
+    -fx-alignment: center;
+}
+
+.spinner {
+    -fx-progress-color: #0D9488;
+}
+
+.server-status {
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-text-fill: rgba(0, 0, 0, 0.6);
+    -fx-alignment: center;
+    -fx-background-color: rgba(0, 0, 0, 0.05);
+    -fx-background-radius: 8px;
+    -fx-padding: 6px 12px;
+}
+
+.server-status-online {
+    -fx-text-fill: #0F766E;
+    -fx-background-color: rgba(13, 148, 136, 0.15);
+    -fx-border-color: rgba(13, 148, 136, 0.3);
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+}
+
+.server-status-offline {
+    -fx-text-fill: #B91C1C;
+    -fx-background-color: rgba(239, 68, 68, 0.15);
+    -fx-border-color: rgba(239, 68, 68, 0.3);
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+}

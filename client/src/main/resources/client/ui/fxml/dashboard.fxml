@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+
+<BorderPane fx:id="root" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ui.controller.DashboardController">
+    <top>
+        <HBox styleClass="top-bar">
+            <Label styleClass="top-bar-logo" text="📋 Quản Lý Công Việc" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="userLabel" styleClass="top-bar-user" />
+            <Label fx:id="roleBadge" styleClass="role-badge" />
+            <Button styleClass="logout-button" text="Đăng xuất" onAction="#handleLogout" />
+        </HBox>
+    </top>
+    <center>
+        <TabPane fx:id="tabPane">
+            <Tab text="Thống kê" closable="false">
+                <VBox styleClass="tab-content" spacing="12">
+                    <Label styleClass="section-title" text="Tổng quan" />
+                    <Label styleClass="section-subtitle" text="Tổng hợp số liệu công việc và nhóm" />
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <VBox spacing="20">
+                            <padding>
+                                <Insets bottom="20" left="5" right="5" top="5" />
+                            </padding>
+                            <GridPane fx:id="statsGrid" styleClass="stats-grid" hgap="20" vgap="20">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="50" minWidth="200" />
+                                    <ColumnConstraints percentWidth="50" minWidth="200" />
+                                </columnConstraints>
+                            </GridPane>
+                            <HBox spacing="20" alignment="CENTER" styleClass="chart-card">
+                                <PieChart fx:id="taskStatusChart" title="Tỷ lệ trạng thái công việc" prefHeight="350" prefWidth="500" legendSide="BOTTOM" />
+                            </HBox>
+                        </VBox>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+            <Tab text="Công việc" closable="false">
+                <VBox styleClass="tab-content" spacing="16">
+                    <Label styleClass="section-title" text="Quản lý công việc" />
+                    <HBox styleClass="toolbar" spacing="10">
+                        <TextField fx:id="searchField" styleClass="search-field" promptText="Tìm kiếm theo tên công việc..." />
+                        <Button styleClass="action-button" text="Tìm kiếm" onAction="#handleSearchTask" />
+                        <Button styleClass="action-button-outline" text="Tải tất cả" onAction="#handleLoadAllTasks" />
+                        <ComboBox fx:id="filterCombo" styleClass="filter-combo" promptText="Lọc theo trạng thái" />
+                        <ComboBox fx:id="sortCombo" styleClass="filter-combo" promptText="Sắp xếp" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="addTaskBtn" styleClass="action-button" text="+ Thêm công việc" onAction="#handleAddTask" />
+                        <Button fx:id="deleteTaskBtn" styleClass="action-button-danger" text="Xóa" onAction="#handleDeleteTask" managed="false" visible="false" />
+                        <Button fx:id="exportCsvBtn" styleClass="action-button-outline" text="Xuất CSV" onAction="#handleExportCSV" managed="false" visible="false" />
+                        <Button fx:id="importCsvBtn" styleClass="action-button-outline" text="Nhập CSV" onAction="#handleImportCSV" managed="false" visible="false" />
+                    </HBox>
+                    <SplitPane dividerPositions="0.65" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="taskTable" />
+                        <VBox styleClass="form-panel" spacing="14" minWidth="280">
+                            <Label fx:id="taskFormTitle" styleClass="form-title" text="+ Thêm công việc" />
+                            <VBox styleClass="form-fields" spacing="10">
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Tiêu đề *" />
+                                    <TextField fx:id="taskTitleField" styleClass="form-field" promptText="Nhập tiêu đề" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Mô tả" />
+                                    <TextArea fx:id="taskDescArea" styleClass="form-area" promptText="Mô tả chi tiết" prefRowCount="3" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Hạn chót *" />
+                                    <DatePicker fx:id="taskDueDatePicker" styleClass="form-datepicker" maxWidth="Infinity" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Trạng thái" />
+                                    <ComboBox fx:id="taskStatusCombo" styleClass="form-combo" maxWidth="Infinity" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Độ ưu tiên" />
+                                    <ComboBox fx:id="taskPriorityCombo" styleClass="form-combo" maxWidth="Infinity" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Nhóm (bỏ trống = cá nhân)" />
+                                    <ComboBox fx:id="taskGroupCombo" styleClass="form-combo" maxWidth="Infinity" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Người thực hiện" />
+                                    <ComboBox fx:id="taskUserCombo" styleClass="form-combo" maxWidth="Infinity" />
+                                </VBox>
+                            </VBox>
+                            <Label fx:id="taskFormError" styleClass="form-error" managed="false" visible="false" />
+                            <HBox styleClass="form-buttons" spacing="8">
+                                <Button fx:id="taskSaveBtn" styleClass="action-button" text="Lưu" onAction="#handleSaveTask" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                                <Button fx:id="taskCancelBtn" styleClass="action-button-outline" text="Huỷ" onAction="#handleCancelTask" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                        </VBox>
+                    </SplitPane>
+                </VBox>
+            </Tab>
+            <Tab fx:id="userTab" text="Người dùng" closable="false">
+                <VBox styleClass="tab-content" spacing="16">
+                    <Label styleClass="section-title" text="Quản lý người dùng" />
+                    <HBox styleClass="toolbar" spacing="10">
+                        <Button styleClass="action-button" text="+ Thêm user" onAction="#handleAddUser" />
+                        <Button styleClass="action-button-outline" text="Vô hiệu/Kích hoạt" onAction="#handleToggleUserStatus" />
+                        <Button fx:id="deleteUserBtn" styleClass="action-button-danger" text="Xóa user" onAction="#handleDeleteUser" />
+                        <Button styleClass="action-button-outline" text="Làm mới" onAction="#handleRefreshUsers" />
+                    </HBox>
+                    <SplitPane dividerPositions="0.65" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="userTable" />
+                        <VBox styleClass="form-panel" spacing="14" minWidth="280">
+                            <Label fx:id="userFormTitle" styleClass="form-title" text="+ Thêm user" />
+                            <VBox styleClass="form-fields" spacing="10">
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Tên đăng nhập *" />
+                                    <TextField fx:id="userUsernameField" styleClass="form-field" promptText="Nhập username" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Mật khẩu" />
+                                    <PasswordField fx:id="userPasswordField" styleClass="form-field" promptText="Để trống nếu không đổi" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Vai trò" />
+                                    <ComboBox fx:id="userRoleCombo" styleClass="form-combo" maxWidth="Infinity" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Họ tên" />
+                                    <TextField fx:id="userFullNameField" styleClass="form-field" promptText="Nhập họ tên" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Số điện thoại" />
+                                    <TextField fx:id="userPhoneField" styleClass="form-field" promptText="Nhập số điện thoại" />
+                                </VBox>
+                            </VBox>
+                            <Label fx:id="userFormError" styleClass="form-error" managed="false" visible="false" />
+                            <HBox styleClass="form-buttons" spacing="8">
+                                <Button fx:id="userSaveBtn" styleClass="action-button" text="Lưu" onAction="#handleSaveUser" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                                <Button fx:id="userCancelBtn" styleClass="action-button-outline" text="Huỷ" onAction="#handleCancelUser" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                        </VBox>
+                    </SplitPane>
+                </VBox>
+            </Tab>
+            <Tab fx:id="groupTab" text="Nhóm" closable="false">
+                <VBox styleClass="tab-content" spacing="16">
+                    <Label styleClass="section-title" text="Quản lý nhóm" />
+                    <HBox styleClass="toolbar" spacing="10">
+                        <Button styleClass="action-button" text="+ Thêm nhóm" onAction="#handleAddGroup" />
+                        <Button fx:id="deleteGroupBtn" styleClass="action-button-danger" text="Xóa nhóm" onAction="#handleDeleteGroup" />
+                        <Button styleClass="action-button-outline" text="Làm mới" onAction="#handleRefreshGroups" />
+                    </HBox>
+                    <SplitPane dividerPositions="0.65" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="groupTable" />
+                        <VBox styleClass="form-panel" spacing="14" minWidth="280">
+                            <Label fx:id="groupFormTitle" styleClass="form-title" text="+ Thêm nhóm" />
+                            <VBox styleClass="form-fields" spacing="10">
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Tên nhóm *" />
+                                    <TextField fx:id="groupNameField" styleClass="form-field" promptText="Nhập tên nhóm" />
+                                </VBox>
+                                <VBox spacing="4">
+                                    <Label styleClass="form-label" text="Mô tả" />
+                                    <TextArea fx:id="groupDescArea" styleClass="form-area" promptText="Mô tả nhóm" prefRowCount="4" />
+                                </VBox>
+                            </VBox>
+                            <Label fx:id="groupFormError" styleClass="form-error" managed="false" visible="false" />
+                            <HBox styleClass="form-buttons" spacing="8">
+                                <Button fx:id="groupSaveBtn" styleClass="action-button" text="Lưu" onAction="#handleSaveGroup" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                                <Button fx:id="groupCancelBtn" styleClass="action-button-outline" text="Huỷ" onAction="#handleCancelGroup" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                            <Separator />
+                            <Label styleClass="form-label" text="Thành viên nhóm" />
+                            <TableView fx:id="groupMemberTable" prefHeight="140" />
+                            <HBox spacing="8">
+                                <ComboBox fx:id="memberUserCombo" styleClass="form-combo" promptText="Chọn user" maxWidth="Infinity" HBox.hgrow="ALWAYS" />
+                                <Button styleClass="action-button" text="Thêm" onAction="#handleAddGroupMember" />
+                                <Button styleClass="action-button-danger" text="Xóa" onAction="#handleRemoveGroupMember" />
+                            </HBox>
+                        </VBox>
+                    </SplitPane>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

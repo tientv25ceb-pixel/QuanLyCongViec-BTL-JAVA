@@ -1,0 +1,6 @@
+.idea/
+target/
+server.log
+terminals/
+*.class
+*.log

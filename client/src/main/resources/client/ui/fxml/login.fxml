@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="root" styleClass="login-background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ui.controller.LoginController">
+    <StackPane VBox.vgrow="ALWAYS">
+        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+            <VBox styleClass="login-card" alignment="CENTER">
+                <Label styleClass="login-logo" text="📋">
+                    <font>
+                        <Font size="48" />
+                    </font>
+                </Label>
+                <Label styleClass="login-title" text="HỆ THỐNG QUẢN LÝ CÔNG VIỆC" />
+                <Label styleClass="login-subtitle" text="Đăng nhập để tiếp tục" />
+                <Label fx:id="serverStatusLabel" styleClass="server-status" text="Đang kết nối đến server..." />
+                <VBox styleClass="login-form" spacing="16">
+                    <VBox styleClass="input-group">
+                        <Label styleClass="input-label" text="Tên đăng nhập" />
+                        <TextField fx:id="usernameField" styleClass="input-field" promptText="Nhập tên đăng nhập" />
+                    </VBox>
+                    <VBox styleClass="input-group">
+                        <Label styleClass="input-label" text="Mật khẩu" />
+                        <PasswordField fx:id="passwordField" styleClass="input-field" promptText="Nhập mật khẩu" onAction="#handleLogin" />
+                    </VBox>
+                    <Button fx:id="loginButton" styleClass="login-button" text="Đăng nhập" onAction="#handleLogin" maxWidth="Infinity" />
+                    <Label fx:id="errorLabel" styleClass="login-error" managed="false" visible="false" />
+                    <Label fx:id="loadingLabel" styleClass="login-loading" managed="false" visible="false" text="Đang xử lý..." />
+                </VBox>
+            </VBox>
+        </VBox>
+    </StackPane>
+</VBox>
