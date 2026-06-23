@@ -1,8 +1,8 @@
-package client.ui.controller;
+package client.controller;
 
 import client.service.CSVUtil;
 import client.service.ServerConnector;
-import common.model.*;
+import client.model.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
@@ -92,7 +92,7 @@ public class DashboardController {
 
     @FXML
     private void initialize() {
-        root.getStylesheets().add(getClass().getResource("/client/ui/css/dashboard.css").toExternalForm());
+        root.getStylesheets().add(getClass().getResource("/client/view/css/dashboard.css").toExternalForm());
     }
 
     public void initData(UserDTO user) {
@@ -1518,7 +1518,7 @@ public class DashboardController {
             ServerConnector.clearSessionToken();
         }
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/ui/fxml/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/view/fxml/login.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) userLabel.getScene().getWindow();
             Scene scene = new Scene(root, 480, 600);

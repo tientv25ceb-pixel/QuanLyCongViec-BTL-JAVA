@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.chart.*?>
 
-<BorderPane fx:id="root" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ui.controller.DashboardController">
+<BorderPane fx:id="root" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.DashboardController">
     <top>
         <HBox styleClass="top-bar">
             <Label styleClass="top-bar-logo" text="📋 Quản Lý Công Việc" />

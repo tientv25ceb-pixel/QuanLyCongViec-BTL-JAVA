@@ -1,9 +1,9 @@
-package client.ui.controller;
+package client.controller;
 
 import client.service.ServerConnector;
-import common.model.Request;
-import common.model.Response;
-import common.model.UserDTO;
+import client.model.Request;
+import client.model.Response;
+import client.model.UserDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.concurrent.Task;
@@ -38,7 +38,7 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        root.getStylesheets().add(getClass().getResource("/client/ui/css/login.css").toExternalForm());
+        root.getStylesheets().add(getClass().getResource("/client/view/css/login.css").toExternalForm());
         
         // Khoi chay kiem tra trang thai server qua UDP
         Thread statusThread = new Thread(() -> {
@@ -120,7 +120,7 @@ public class LoginController {
 
     private void openDashboard(UserDTO user) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/ui/fxml/dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/view/fxml/dashboard.fxml"));
             Parent root = loader.load();
             DashboardController controller = loader.getController();
             controller.initData(user);

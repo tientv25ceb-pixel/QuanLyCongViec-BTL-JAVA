@@ -4,10 +4,10 @@ module client {
     requires com.google.gson;
 
     opens client.main to javafx.graphics;
-    opens client.ui.controller to javafx.fxml;
-    opens common.model to com.google.gson;
+    opens client.controller to javafx.fxml;
+    opens client.model to com.google.gson;
 
     exports client.main;
-    exports client.ui.controller;
-    exports common.model;
+    exports client.controller;
+    exports client.model;
 }

@@ -1,4 +1,4 @@
-package common.model;
+package client.model;
 
 public class SystemLogDTO {
     private int id;

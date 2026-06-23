@@ -1,6 +1,6 @@
 package client.service;
 
-import common.model.TaskDTO;
+import client.model.TaskDTO;
 
 import java.io.*;
 import java.util.ArrayList;

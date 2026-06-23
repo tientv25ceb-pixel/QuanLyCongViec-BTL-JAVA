@@ -10,7 +10,7 @@ public class ClientMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/ui/fxml/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/view/fxml/login.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 480, 600);
         primaryStage.setScene(scene);

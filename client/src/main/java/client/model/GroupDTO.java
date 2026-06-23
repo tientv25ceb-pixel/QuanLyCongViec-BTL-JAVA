@@ -1,4 +1,4 @@
-package common.model;
+package client.model;
 
 public class GroupDTO {
     private int id;

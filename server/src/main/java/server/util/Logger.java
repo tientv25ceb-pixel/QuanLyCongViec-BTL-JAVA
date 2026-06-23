@@ -1,5 +1,6 @@
 package server.util;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,18 @@ public class Logger {
     
     // ThreadLocal de luu tru requestId cua luong hien tai
     private static final ThreadLocal<String> threadRequestId = new ThreadLocal<>();
+
+    // PrintWriter giu file mo lien tuc va dung BufferedWriter de dem dữ liệu ghi xuong dia
+    private static PrintWriter fileWriter;
+
+    static {
+        try {
+            // autoFlush = true để đẩy dữ liệu xuống file ngay khi println
+            fileWriter = new PrintWriter(new BufferedWriter(new FileWriter(LOG_FILE, true)), true);
+        } catch (IOException e) {
+            System.err.println("Loi khi khoi tao file log: " + e.getMessage());
+        }
+    }
 
     public static void setRequestId(String requestId) {
         threadRequestId.set(requestId);
@@ -37,11 +50,11 @@ public class Logger {
         // Ghi ra console
         System.out.println(logMessage);
 
-        // Ghi ra file
-        try (PrintWriter out = new PrintWriter(new FileWriter(LOG_FILE, true))) {
-            out.println(logMessage);
-        } catch (IOException e) {
-            System.err.println("Loi khi ghi log file: " + e.getMessage());
+        // Ghi ra file (Dong bo hoa tranh xung dot giua cac thread client)
+        if (fileWriter != null) {
+            synchronized (Logger.class) {
+                fileWriter.println(logMessage);
+            }
         }
 
         // Ghi vao database (bang system_logs)
